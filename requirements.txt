@@ -1,8 +1,9 @@
-fastapi
-uvicorn[standard]
 torch
 torchvision
 timm
+fastapi
+uvicorn
+pillow
 numpy
-Pillow
 matplotlib
+huggingface_hub

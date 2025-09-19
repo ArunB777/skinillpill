@@ -26,13 +26,17 @@ HF_TOKEN = os.environ.get("HF_TOKEN")
 if HF_TOKEN:
     login(HF_TOKEN)
 else:
-    print("Warning: HF_TOKEN not set. Private repos may not be accessible.")
+    print("Warning: HF_TOKEN not set. Make sure the repo is public or the token is provided as a secret.")
 
 # ============================================
 # HF MODEL PATHS
+# Using token for private repo access
 HAM_EFF_PATHS = [
-    hf_hub_download(repo_id="arunbaigra/skinillpill", filename=f"final_model_fold{i}.pth", use_auth_token=HF_TOKEN)
-    for i in range(5)
+    hf_hub_download(
+        repo_id="arunbaigra/skinillpill",
+        filename=f"final_model_fold{i}.pth",
+        use_auth_token=HF_TOKEN
+    ) for i in range(5)
 ]
 
 HAM_EFF_CLASSES = [
@@ -45,7 +49,11 @@ HAM_EFF_CLASSES = [
     "Vascular lesions (vasc)"
 ]
 
-CONVNEXT_MASSIVE_PATH = hf_hub_download(repo_id="arunbaigra/skinillpill", filename="best_finetune.pth", use_auth_token=HF_TOKEN)
+CONVNEXT_MASSIVE_PATH = hf_hub_download(
+    repo_id="arunbaigra/skinillpill",
+    filename="best_finetune.pth",
+    use_auth_token=HF_TOKEN
+)
 CONVNEXT_MASSIVE_CLASSES = [
     "Actinic Keratosis Basal Cell Carcinoma And Other Malignant Lesions",
     "Malignant",
@@ -59,7 +67,11 @@ CONVNEXT_MASSIVE_CLASSES = [
     "Poison Ivy And Other Contact Dermatitis",
 ]
 
-CONVNEXT_HAM_PATH = hf_hub_download(repo_id="arunbaigra/skinillpill", filename="fine_tuned_convnext_ham.pth", use_auth_token=HF_TOKEN)
+CONVNEXT_HAM_PATH = hf_hub_download(
+    repo_id="arunbaigra/skinillpill",
+    filename="fine_tuned_convnext_ham.pth",
+    use_auth_token=HF_TOKEN
+)
 CONVNEXT_HAM_CLASSES = HAM_EFF_CLASSES
 
 # ============================================
@@ -72,7 +84,7 @@ transform = transforms.Compose([
 ])
 
 # ============================================
-# MODELS (unchanged)
+# MODELS
 class SkinEffNet(nn.Module):
     def __init__(self, num_classes=7):
         super().__init__()
@@ -83,6 +95,7 @@ class SkinEffNet(nn.Module):
 def load_eff_model(path):
     model = SkinEffNet(num_classes=len(HAM_EFF_CLASSES))
     state_dict = torch.load(path, map_location=DEVICE)
+    # Remove "module." prefix if using DataParallel
     new_state_dict = {k[7:] if k.startswith('module.') else k: v for k, v in state_dict.items()}
     model.load_state_dict(new_state_dict, strict=False)
     model.to(DEVICE).eval()
@@ -122,7 +135,7 @@ convnext_massive = load_convnext(CONVNEXT_MASSIVE_PATH, len(CONVNEXT_MASSIVE_CLA
 convnext_ham = load_convnext(CONVNEXT_HAM_PATH, len(CONVNEXT_HAM_CLASSES))
 
 # ============================================
-# GRAD-CAM (unchanged)
+# GRAD-CAM
 class GradCAM:
     def __init__(self, model, target_layer):
         self.model = model
