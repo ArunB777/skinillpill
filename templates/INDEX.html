@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkinIllPill | Dermatology Classification</title>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Static CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', path='STYLES.css') }}">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>  
+
+  <!-- Header Section -->
+  <header class="main-header">
+    <a href="{{ url_for('index') }}" class="logo-link">
+      <div class="logo">SkinLesionAI</div>
+    </a>
+    <nav class="nav-links">
+      <a href="{{ url_for('about') }}">About</a>
+      <a href="{{ url_for('login') }}">Login</a>
+    </nav>
+  </header>
+
+  <!-- Upload Section -->
+  <section class="upload-section">
+    <div id="drop-zone" class="upload-box">
+      <p>Drag & drop an image here or click to browse</p>
+      <input type="file" id="file-input" accept="image/*" hidden />
+      <img id="preview" class="image-preview" style="display: none;" />
+    </div>
+    
+    <select id="model-select" aria-label="Model selection">
+      <option value=""> Select Model </option>
+      <option value="efficientnet">HAM10000 (EfficientNet)</option>
+      <option value="convnext_ham">HAM10000 (ConvNeXt)</option>
+      <option value="convnext_massive">Massive Dataset (ConvNeXt)</option>
+    </select>
+      
+    <div class="upload-controls">
+      <button id="classify-btn">Classify</button>
+    </div>
+  </section>
+
+  <!-- Result Section -->
+  <section class="results" id="result-section" style="display: none;">
+    <h2>Classification Result</h2>
+
+    <div class="result-content">
+      <div class="output">
+        <p><strong>Predicted Class:</strong> <span id="predicted-class">-</span></p>
+        <p><strong>Confidence Score:</strong> <span id="confidence-score">-</span></p>
+        <p><strong>Prediction Time:</strong> <span id="prediction-time">-</span></p>
+      </div>
+
+      <div class="histogram-box">
+        <h3>Class Probabilities</h3>
+        <canvas id="probs-chart" width="600" height="300"></canvas>
+      </div>
+
+      <div class="heatmap-box">
+        <h3>Heatmap Visualization</h3>
+        <img id="heatmap" src="" alt="Heatmap" />
+      </div>
+    </div>
+
+    <small class="disclaimer">
+      ⚠️ This tool is intended for <strong>educational purposes only</strong>.  
+      It is not a substitute for professional medical advice.
+    </small>
+  </section>
+
+  <!-- Static JS -->
+  <script src="{{ url_for('static', path='MAIN.js') }}"></script>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>Made by Arun Baigra</p>
+      <div class="footer-links">
+        <a href="mailto:arunbaigra4@gmail.com"><i class="fas fa-envelope"></i> arunbaigra4@gmail.com</a>
+        <a href="https://github.com/ArunB777" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+      <p class="copyright">© 2025 SkinLesionAI. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

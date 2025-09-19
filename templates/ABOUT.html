@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkinIllPill | Dermatology Classification</title>
+
+  <!-- Correct way to load static CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', path='STYLES.css.css') }}">
+
+  <!-- Optional: FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body> 
+
+  <!-- Header -->
+  <header class="main-header">
+    <a href="{{ url_for('index') }}" class="logo-link">
+        <div class="logo">SkinLesionAI</div>
+    </a>
+    <nav class="nav-links">
+      <a href="{{ url_for('login') }}">Login</a>
+    </nav>
+  </header>
+
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <h2>✨ About <span>SkinLesionAI</span></h2>
+    
+    <div class="about-card">
+      <p>
+        <strong>SkinLesionAI</strong> is a deep learning–based research project 
+        developed for <em>educational and academic purposes</em>. It classifies 
+        skin lesion images into multiple categories, supporting the study of 
+        dermatology and AI in healthcare.
+      </p>
+    </div>
+
+    <div class="about-info">
+      <div class="info-item">
+        <h3>🎯 Motivation</h3>
+        <p>
+          Inspired by the idea of exploring how AI can help analyze both 
+          <em>normal and abnormal skin lesions</em>, not only cancerous ones.  
+          The goal is to show how AI can support researchers, students, 
+          and developers in dermatology.
+        </p>
+      </div>
+
+      <div class="info-item">
+        <h3>📂 Acknowledgments</h3>
+        <p>
+          Trained on publicly available dermatology datasets such as 
+          <strong>ISIC 2019</strong>. Thanks to the open-source community 
+          for providing valuable resources.
+        </p>
+      </div>
+
+      <div class="info-item disclaimer">
+        <h3>⚠️ Disclaimer</h3>
+        <p>
+          This tool is for <strong>research and educational purposes only</strong>.  
+          It is not a substitute for medical advice, diagnosis, or treatment.  
+          Always consult a qualified dermatologist for concerns.
+        </p>
+      </div>
+    </div>
+
+    <div class="credits">
+      <h3>👨‍💻 Developer Info</h3>
+      <p><strong>Developer:</strong> Arun Baigra</p>
+      <p><strong>🐙 GitHub:</strong> <a href="https://github.com/ArunB777" target="_blank">ArunB777</a></p>
+      <p><strong>✉️ Email:</strong> <a href="mailto:arunbaigra4@gmail.com">arunbaigra4@gmail.com</a></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <p>Made by Arun Baigra</p>
+      <div class="footer-links">
+        <a href="mailto:arunbaigra4@gmail.com"><i class="fas fa-envelope"></i> arunbaigra4@gmail.com</a>
+        <a href="https://github.com/ArunB777" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+      </div>
+      <p class="copyright">© 2025 SkinLesionAI. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="{{ url_for('static', path='MAIN.js.js') }}"></script>
+</body>
+</html>
